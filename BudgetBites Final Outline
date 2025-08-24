@@ -1,0 +1,181 @@
+Android App: Budget Bites
+Project Description
+Budget Bites is a user-friendly Android app designed to help families plan meals, manage grocery lists, and reduce food waste all while sticking to a tight budget. The app is built to promote collaboration, allowing family members to contribute meal ideas, track pantry items, and automatically generate grocery lists based on planned meals.
+Purpose
+To create a user-friendly Android app that enables families to collaboratively plan meals, manage pantry inventory, generate smart grocery lists, and estimate weekly meal costs  all with budget-conscious functionality.
+Key Features
+•	Collaborative weekly meal planning
+•	Pantry inventory tracking
+•	Smart grocery list generator
+•	Budget estimation for meals
+•	Simple and clean user interface designed with Material Design principles
+Problem Addressing
+Families often face difficulty planning meals efficiently, staying on budget, and avoiding food waste. Many available apps focus solely on recipes or meal logging, but lack tools to manage what ingredients a user already has or support family-based collaboration. Budget Bites aims to solve this by integrating meal planning, pantry management, and cost tracking into one intuitive Android app.
+Platform Specifications
+•	Platform: Andriod 
+•	Language: Kotlin
+•	Emulator: Andripd Virtual Device (AVD)
+•	Version Control: GithHub
+•	ViewModel + LiveData/Flow
+•	Retrofit (Prepared for meal API integration, optional future use)
+Front/Back End Architecture
+Frontend (Jetpack Compose Screens)
+1.	Navigation.kt
+•	Implements bottom navigation (Grocery, Pantry, Meals)
+•	Uses NavHost and Scaffold for layout
+2.	Screens
+•	GroceryListScreen.kt: UI to display and manage grocery list items.
+•	PantryScreen.kt: UI for pantry tracking.
+•	MealPlannerScreen.kt: UI with input fields (meal name, description) and button to add meals.
+•	HomeScreen.kt / SettingsScreen.kt: Placeholder support screens.
+3.	UI Features
+•	Material Design components (Scaffold, BottomNavigation, TextField, Button).
+•	Icons from androidx.compose.material.icons.
+•	Screens update reactively through ViewModels.
+Backend (Data, Database & Architecture)
+1.	Database Layer (Room)
+
+•	Entities (Data Classes):
+•	GroceryItem
+•	PantryItem
+•	Meal
+
+•	DAOs: 
+•	GroceryDao (CRUD for groceries)
+•	PantryDao (CRUD for pantry)
+•	MealDao (CRUD for meals)
+
+•	Database:
+•	AppDatabase ties DAOs together.
+
+2.	Repositories
+
+•	GroceryRepository - Handles grocery data operations.
+•	PantryRepository - Handles pantry data operations.
+•	MealRepository - Handles meal data operations.
+•	Abstracts DAOs - Keeps UI clean from DB code.
+3.	ViewModels
+•	GroceryViewModel -  Fetch/add groceries via GroceryRepository.
+•	PantryViewModel  - Same for pantry.
+•	MealViewModel  - Same for meal planning.
+•	ViewModels are lifecycle-aware - safe for Compose recompositions.
+
+4.	Application Layer
+•	BudgetBitesApplication → Initializes database & repositories at app startup.
+5.	MainActivity
+•	Entry point of the app.
+•	Creates ViewModels.
+•	Passes repositories into Navigation () for screen-level access.
+App Functionality
+•	Grocery List:
+•	Add grocery items
+•	View current grocery list
+•	Pantry
+•	Track pantry inventory
+•	Update as items are consumed or added
+
+•	Meal Planner
+•	Add meals with name and description
+•	Store planned meals in database
+•	Navigation
+•	Bottom navigation between Grocery, Pantry, Meals
+•	Offline Support
+•	Data stored locally in Room DB
+VI. Design (Wireframes)
+Wireframes were first developed in JustInMind to map out user interactions before development. This process follows user-centered design practices, which prioritize prototyping and testing before coding begins (Johnson, 2021).
+The following wireframes and final mirrored app screenshots represent the design process:
+1.	Grocery List Screen
+•	Function: Add, remove, and manage grocery items.
+•	Layout: Input fields with buttons for adding items and a scrollable list.
+•	Final Screen: Users can input groceries and view them in a live-updated list.
+2.	Pantry Screen
+•	Function: Track pantry items, quantities, and availability.
+•	Layout: Itemized list with edit/delete options.
+•	Final Screen: A simple inventory system that lets users monitor storage.
+3.	Meal Planner Screen
+•	Function: Plan meals linked to available pantry items.
+•	Layout: Visual card-based interface with food images.
+•	Final Screen: Example meals include Spaghetti Bolognese, Grilled Chicken Salad, and Vegetable Stir Fry.
+				
+ 
+VII. Change Log (Module 5)
+Version 1.0 - Module 1
+•	Created initial app concept and outline
+•	Identified core business problem and innovation model
+Version 1.1 - Module 2
+•	Developed blog/wiki on cloud vs. local development
+•	Highlighted app innovation using Hyman’s framework
+Version 1.2 - Module 3
+•	Completed wireframes using JustInMind
+•	Designed layout for Home, Meal Planner, Grocery List
+Version 1.3 - Module 4
+•	Developed basic layout and navigation in Android Studio
+•	Integrated navigation between modules
+•	Updated README and added app visuals to GitHub
+Version 1.4 - Module 5
+•	Implemented SQLite database for pantry and grocery list
+•	Created UI for ingredient tracking and budget estimation
+•	Synced latest code to GitHub with updated screenshots
+Version 1.5 - Module 6
+•	Added Room entities, DAOs, repositories for Grocery, Pantry, Meals
+•	Implemented ViewModels (MVVM) to connect UI with database
+•	Improved Meal Planner with text and add meal functionality
+Version 1.6 Module 7
+•	 Fixed navigation errors by replacing broken Restaurant/Fastfood references with correct Screen classes
+•	 Rebuilt Navigation.kt with Jetpack Compose Scaffold + BottomNavigation
+•	Integrated BudgetBitesApplication + MainActivity to initialize database and repositories properly
+•	Refactored project tree for clarity (data, network, screens, viewmodel)
+
+Version 1.7 – Module 8
+•	Debugged and finalized Navigation + Repository + ViewModel integration
+•	Resolved multiple compile-time issues (missing imports, Compose errors, repository injection)
+•	Ensured Grocery, Pantry, and Meal Planner screens are fully functional and connected to database
+•	Prepared formal outline report, change log, and README.md for GitHub submission
+Play Store Requirements
+To prepare for Google Play Store deployment, BudgetBites must comply with publishing requirements (Google Play Console, 2023):
+1.	App Information
+•	Title: BudgetBites – Smart Meal & Grocery Planner.
+•	Description: Helps users plan meals, track groceries, and save money.
+2.	Assets
+•	High-resolution app icon (512x512).
+•	Feature graphic (1024x500).
+•	Screenshots of all key screens.
+3.	Policies & Compliance
+•	Privacy Policy hosted externally.
+•	Data handling disclosure (local-only, no user data sent to servers).
+4.	Technical Requirements
+•	Signed APK/AAB with release key.
+•	Min SDK: Android 8.0 (API 26).
+•	Target SDK: Android 14 (API 34).
+5.	Testing & Deployment
+•	Internal testing via Play Console.
+•	Closed testing before production rollout.
+GitHub Repository Overview
+•	Repository Name: budget-bites-app
+•	 README.md Includes:
+•	App description and purpose
+•	Installation instructions
+•	Development tools and dependencies
+•	Feature list and screenshots
+•	Wiki Pages
+•	Module Breakdown
+•	UI/UX design strategy
+•	Version changelog
+•	Design visua (wireframes/screens)
+References
+Android Developers. (2024). Guide to app architecture (MVVM and Room). Retrieved from https://developer.android.com/jetpack/guide
+FAO. (2019). The State of Food and Agriculture: Food Loss and Waste Reduction. Rome: Food and Agriculture Organization of the United Nations.
+Google. (2023). Jetpack Compose overview. Retrieved from https://developer.android.com/jetpack/compose
+Google Play Console. (2023). Launch checklist for publishing on Google Play. Retrieved from https://play.google.com/console
+Johnson, M. (2021). User-centered design: Principles and practices. UX Design Journal, 14(2), 45-62.
+Johnson, R. (2021). Designing user-centered applications: Wireframes and prototyping. UX Press.
+Smith, L. (2022). Food sustainability and technology-driven solutions. Journal of Sustainable Practices, 14(2), 45–58.
+
+
+
+
+
+
+
+
+
