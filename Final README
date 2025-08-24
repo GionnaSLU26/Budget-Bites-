@@ -1,0 +1,116 @@
+BudgetBites README
+
+ Project Overview
+Budget Bites is a user-friendly Android app designed to help families plan meals, manage grocery lists, and reduce food waste all while sticking to a tight budget. The app promotes collaboration, allowing family members to contribute meal ideas, track pantry items, and automatically generate grocery lists based on planned meals.
+
+Directory Structure
+BudgetBites/
+ └── app/
+      ├── src/main/java/com/example/budgetbites/
+      │    ├── BudgetBitesApplication.kt
+      │    ├── MainActivity.kt
+      │    ├── di/AppModule.kt
+      │    ├── data/
+      │    │     ├── Meal.kt
+      │    │     ├── PantryItem.kt
+      │    │     ├── GroceryItem.kt
+      │    │     ├── MealDao.kt
+      │    │     ├── PantryDao.kt
+      │    │     ├── GroceryDao.kt
+      │    │     ├── AppDatabase.kt
+      │    │     ├── MealRepository.kt
+      │    │     ├── PantryRepository.kt
+      │    │     ├── GroceryRepository.kt
+      │    ├── network/
+      │    │     ├── MealApiService.kt
+      │    │     ├── MealApiModels.kt
+      │    ├── viewmodel/
+      │    │     ├── MealViewModel.kt
+      │    │     ├── PantryViewModel.kt
+      │    │     ├── GroceryViewModel.kt
+      │    ├── screens/
+      │    │     ├── HomeScreen.kt
+      │    │     ├── MealPlannerScreen.kt
+      │    │     ├── PantryScreen.kt
+      │    │     ├── GroceryListScreen.kt
+      │    │     ├── BudgetSummaryScreen.kt
+      │    │     ├── SettingsScreen.kt
+      │    │     ├── Navigation.kt
+      │    └── ui/theme/
+      │          ├── Color.kt
+      │          ├── Theme.kt
+      │          ├── Type.kt
+      └── res/values/
+           ├── colors.xml
+           ├── themes.xml
+           ├── themes-night.xml
+
+Kotlin Source Code
+All functionality is implemented in Kotlin using MVVM architecture + Hilt dependency injection.
+
+app/src/main/java/com/example/budgetbites/
+
+•	BudgetBitesApplication.kt → Initializes Hilt for dependency injection.
+•	MainActivity.kt → App entry point, sets up Jetpack Compose navigation.
+•	data/
+•	Entities (Meal, PantryItem, GroceryItem) → Represent database tables.
+•	DAOs (MealDao, PantryDao, GroceryDao) → Database queries (insert, update, delete, fetch).
+•	Repositories → Abstract data sources, combine Room + Retrofit APIs.
+•	AppDatabase.kt → Room database configuration.
+•	network/
+•	MealApiService.kt → Retrofit API calls to TheMealDB (search meals, fetch categories, etc.).
+•	MealApiModels.kt → Data models for parsing JSON responses.
+
+•	viewmodel/
+
+•	MealViewModel.kt → Exposes meals data and handles add/delete.
+•	PantryViewModel.kt → Exposes pantry items and handles stock updates.
+•	GroceryViewModel.kt → Exposes grocery list and manages add/remove.
+
+•	screens/
+•	HomeScreen.kt → Navigation hub with buttons for each feature.
+•	MealPlannerScreen.kt → UI to view, search, and add meals.
+•	PantryScreen.kt → UI to track pantry items.
+•	GroceryListScreen.kt → UI for collaborative shopping list.
+•	BudgetSummaryScreen.kt → Displays spending summary with charts (Vico).
+•	SettingsScreen.kt → App preferences (themes, future expansion).
+•	Navigation.kt → Handles navigation routes across screens.
+
+di/AppModule.kt → Provides Room DAOs and Retrofit services for Hilt injection.
+
+XML Layout Files
+Since UI is built with Jetpack Compose, XML layouts are minimal:
+
+ app/src/main/res/values/
+•	colors.xml → App’s color palette (orange = meals, green = pantry, blue = groceries, yellow = budget).
+•	themes.xml & themes-night.xml → Light & Dark mode theme configuration.
+•	strings.xml → Static text resources.
+
+Andriod Manifest
+	app/src/main/AndroidManifest.xml
+contains: 
+•	Permissions : INTERNET (for API calls).
+•	App metadata:  package name, icons, app name.
+•	Activities:  Declares MainActivity as the launcher.
+•	Theme : Applies Theme.BudgetBites.
+
+Build Files
+build.gradle.kts
+•	Dependencies
+•	Jetpack Compose (UI)
+•	Room (database)
+•	Retrofit (networking)
+•	Hilt (dependency injection)
+•	Vico (charts)
+•	Coil (image loading)
+•	Gradle setup -  Kotlin DSL (.kts) for modular and clean builds.
+
+Installation Instruction:
+1.	Clone the repo to your local machine
+2.	Open in Andriod Studio
+3.	Sync gradle (Let dependencies download)
+4.	Run on an emulator/device (API 24+)
+
+Usage
+When the app launches, the Home Screen serves as the central hub, giving users quick access to the Meal Planner, Pantry, Grocery List, Budget Summary, and Settings. In the Meal Planner, families can add or search for meals and automatically generate grocery needs based on planned recipes. The Pantry helps track ingredients already on hand, reducing food waste by ensuring items are used before they expire. The grocery List makes shopping collaborative, allowing family members to build and update lists together in real time. The Budget Summary keeps spending transparent by tracking meal costs and presenting the information through clear visual charts. Finally, the Settings menu lets users personalize their experience, adjusting themes and enabling sync options for greater flexibility.
+
